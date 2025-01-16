@@ -14,3 +14,9 @@ node_modules
 
 # .DS_Store is only for Mac users
 **/.DS_Store
+
+#add README.md to the .gitignore file
+README.md
+
+#add node_modules to the .gitignore file
+node_modules
