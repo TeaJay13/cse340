@@ -44,7 +44,7 @@ nav ul{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: auto;
   padding: 1rem;
   background-color: var(--darker-color);
   color: white;
