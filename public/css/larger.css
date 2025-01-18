@@ -1,0 +1,14 @@
+@media screen and (min-width: 1200px){
+
+    body{
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    #delorean-r\&u{
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+}

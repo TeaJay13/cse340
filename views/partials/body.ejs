@@ -1,35 +1,70 @@
 <body>
     <h1>Welcome to CSE Motors!</h1>
 
-    <div>
-        <h2>DMC Delorean Reviews</h2>
+    <div id="content">
 
-        <ul>
-            <li>"So fast it's almost like traveling in time."" (4/5)</li>
-            <li>"Coolest ride on the road." (4/5)</li>
-            <li>"I'm feeling McFly!" (5/5)</li>
-            <li>"The most futuristc ride of our day." (4.5/5)</li>
-            <li>"80's livin and i love it!" (5/5)</li>
-        </ul>
-    </div>
+        <figure id="delorean">
+            <picture>
+                <source srcset = "/images/vehicles/delorean-tn.jpg" media = "(max-width: 700px)">
+                <img src = "/images/vehicles/delorean.jpg" alt = "Delorean">
+            </picture>
 
-    <div>
-        <h2>Delorean Upgrades</h2>
+            <div id = "delorean-info">
+                <h3>DMC Delorean</h3>
+                <p>3 Cup holders</p>
+                <p>Superman doors</p>
+                <p>Fuzzy dice!</p>
 
-        <div class = "card">
-            <img src = "/images/flux-cap.png" alt = "Flux Capacitor">
-        </div>
+                <button>Own Today</button>
+            </div>
+        </figure>
 
-        <div class = "card">
-            <img src = "/images/flame.jpg" alt = "Flame Decals">
-        </div>
+        <div id = "delorean-r&u">
+            <div id = "reviews">
+                <h2>DMC Delorean Reviews</h2>
 
-        <div class = "card">
-            <img src = "/images/bumper_sticker.jpg" alt = "Bumper Stickers">
-        </div>
+                <ul>
+                    <li>"So fast it's almost like traveling in time."" (4/5)</li>
+                    <li>"Coolest ride on the road." (4/5)</li>
+                    <li>"I'm feeling McFly!" (5/5)</li>
+                    <li>"The most futuristc ride of our day." (4.5/5)</li>
+                    <li>"80's livin and i love it!" (5/5)</li>
+                </ul>
+            </div>
 
-        <div class = "card">
-            <img src = "/images/hub-cap.jpg" alt = "Hub Caps">
+            <div id="upgrades">
+                <h2>Delorean Upgrades</h2>
+
+                <div id = "upgrade-cards">
+                    <div class = "card">
+                        <figure>
+                            <img src = "/images/upgrades/flux-cap.png" alt = "Flux Capacitor">
+                            <figcaption>Flux Capacitor</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class = "card">
+                        <figure>
+                            <img src = "/images/upgrades/flame.jpg" alt = "Flame Decals">
+                            <figcaption>Flame Decals</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class = "card">
+                        <figure>
+                            <img src = "/images/upgrades/bumper_sticker.jpg" alt = "Bumper Stickers">
+                            <figcaption>Bumper Sticker</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class = "card">
+                        <figure>
+                            <img src = "/images/upgrades/hub-cap.jpg" alt = "Hub Caps">
+                            <figcaption>Hub Caps</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
