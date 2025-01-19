@@ -1,6 +1,6 @@
 @media screen and (min-width: 1200px){
 
-    main{
+    body{
         max-width: 1000px;
         margin: 0 auto;
         background-image: url(../images/site/small_check.jpg);
