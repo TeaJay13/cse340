@@ -39,7 +39,6 @@ body{
 }
 
 
-
 nav ul{
   display: flex;
   justify-content: space-between;
@@ -47,8 +46,10 @@ nav ul{
   width: auto;
   padding: 1rem;
   background-color: var(--darker-color);
-  color: white;
   list-style: none;
+}
+nav ul li a{
+  color: white;
 }
 
 #delorean{
