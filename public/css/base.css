@@ -99,3 +99,14 @@ nav ul li a{
   margin: 1rem;
   background-color: var(--bright-color);
 }
+
+#vehicle-detail-content{
+  display: block;
+  text-align: center;
+  padding: 1rem;
+}
+#wrapper > main > main > div > img{
+  width: 500px;
+  height: 500px;
+  border: #2B2D42 1px solid;
+}

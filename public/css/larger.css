@@ -16,4 +16,8 @@
         justify-content: space-between;
     }
 
+
+    #vehicle-detail-content{
+        display: flex
+      }
 }
