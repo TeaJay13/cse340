@@ -1,0 +1,12 @@
+<main>
+  <h1><%= title %></h1>
+  <p class="error-message"><%= message %></p>
+
+  <div class="error-humor">
+    <% if (title === "404") { %>
+      <p>Oops! Seems like you've wandered into the void. Try <a href="/">going home</a> before the monsters find you.</p>
+    <% } else { %>
+      <p>Something went wrong, but don’t worry—our adventurers are on it! Meanwhile, you might want to <a href="/">return to safety</a>.</p>
+    <% } %>
+  </div>
+</main>
