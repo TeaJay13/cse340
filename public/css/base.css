@@ -110,3 +110,23 @@ nav ul li a{
   height: 500px;
   border: #2B2D42 1px solid;
 }
+
+form {
+  width: 500px;
+  margin: 0 auto;
+  background-color: #2B2D42;
+  padding: 10px;
+  border: black 1px solid;
+}
+label, input {
+  display: flex;
+  text-align: center;
+  color: var(--neutral-color);
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px; /* Adds spacing between fields */
+}
+button {
+  width: 100%;
+  margin-top: 10px;
+}
