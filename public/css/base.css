@@ -117,11 +117,11 @@ form {
   background-color: #2B2D42;
   padding: 10px;
   border: black 1px solid;
+  color: var(--neutral-color);
 }
 label, input {
   display: flex;
   text-align: center;
-  color: var(--neutral-color);
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 10px; /* Adds spacing between fields */
