@@ -13,7 +13,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:id", invController.getVehicleDetail);
 
 // Route to get display inventory management page
-router.get("/management", invController.buildManagement);
+router.get("/management", invController.buildManagementView);
 
 // Route to get add-classification page
 router.get("/add-classification", invController.buildAddClassification);
@@ -36,5 +36,14 @@ router.post(
     inventoryValidate.checkInventoryData,
     utilities.handleErrors(invController.addInventory)
 )
+
+// Route to handle fetching inventory data based on classification
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// Route to build edit inventory view
+router.get(
+    "/edit/:inv_id",
+    utilities.handleErrors(invController.editInventoryView)
+);
 
 module.exports = router;

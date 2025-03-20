@@ -80,4 +80,10 @@ async function addInventory(vehicleData){
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleById, addClassification, addInventory}
+module.exports = {
+  getClassifications,
+  getInventoryByClassificationId,
+  getVehicleById,
+  addClassification,
+  addInventory
+};
