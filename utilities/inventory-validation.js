@@ -80,4 +80,54 @@ validate.checkInventoryData = async (req, res, next) => {
     }
 }
 
-module.exports = validate
+/**
+ * Middleware to validate update inventory data
+ */
+const checkUpdateData = async (req, res, next) => {
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+
+  let errors = [];
+  // ...existing validation logic...
+
+  if (errors.length > 0) {
+    const nav = await utilities.getNav();
+    const classificationSelect = await utilities.buildClassificationList(classification_id);
+    const itemName = `${inv_make} ${inv_model}`;
+    res.status(400).render("inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect,
+      errors,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    });
+  } else {
+    next();
+  }
+};
+
+module.exports = {
+  ...validate,
+  checkUpdateData,
+};
