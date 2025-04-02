@@ -1,0 +1,18 @@
+<h1>Delete Inventory Item</h1>
+<p>Confirm Deletion - The delete is permanent.</p>
+<form action="/inv/delete" method="POST">
+  <label for="inv_make">Make:</label>
+  <input type="text" id="inv_make" name="inv_make" value="<%= invData.inv_make %>" readonly>
+
+  <label for="inv_model">Model:</label>
+  <input type="text" id="inv_model" name="inv_model" value="<%= invData.inv_model %>" readonly>
+
+  <label for="inv_year">Year:</label>
+  <input type="text" id="inv_year" name="inv_year" value="<%= invData.inv_year %>" readonly>
+
+  <label for="inv_price">Price:</label>
+  <input type="text" id="inv_price" name="inv_price" value="<%= invData.inv_price %>" readonly>
+
+  <input type="hidden" name="inv_id" value="<%= invData.inv_id %>">
+  <button type="submit">Delete</button>
+</form>

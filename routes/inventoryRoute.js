@@ -1,22 +1,22 @@
 // Needed Resources 
 const express = require("express")
 const router = new express.Router() 
-const invController = require("../controllers/invController")
+const invController = require("../controllers/invController") // Updated to point to invController.js
 const utilities = require("../utilities")
 const classificationValidate = require("../utilities/classification-validation")
 const inventoryValidate = require("../utilities/inventory-validation")
 
 // Route to build inventory by classification view
-router.get("/type/:classificationId", invController.buildByClassificationId);
+router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId))
 
 // Route to get vehicle details by vehicle id
-router.get("/detail/:id", invController.getVehicleDetail);
+router.get("/detail/:id", utilities.handleErrors(invController.getVehicleDetail))
 
 // Route to get display inventory management page
-router.get("/management", invController.buildManagementView);
+router.get("/management", utilities.handleErrors(invController.buildManagementView))
 
 // Route to get add-classification page
-router.get("/add-classification", invController.buildAddClassification);
+router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
 
 // Route to handle post submission of add-classification form
 router.post(
@@ -27,7 +27,7 @@ router.post(
 )
 
 // Route to get add-inventory page
-router.get("/add-inventory", invController.buildAddInventory);
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory))
 
 // Route to handle post submission of add-inventory form
 router.post(
@@ -44,14 +44,20 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 router.get(
     "/edit/:inv_id",
     utilities.handleErrors(invController.editInventoryView)
-);
+)
 
 // Route to handle update inventory
 router.post(
   "/update/",
   inventoryValidate.inventoryRules(), // Reuse inventoryRules
   inventoryValidate.checkUpdateData,
-  invController.updateInventory
-);
+  utilities.handleErrors(invController.updateInventory)
+)
 
-module.exports = router;
+// Route to deliver delete confirmation view
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteConfirmation))
+
+// Route to process the delete
+router.post("/delete", utilities.handleErrors(invController.deleteInventoryItem))
+
+module.exports = router

@@ -30,7 +30,7 @@ router.post(
 // Account route
 router.get("/account", utilities.handleErrors(accountController.buildAccount));
 
-// router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement)) unused havent completed the team activity yet
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
  
 
 module.exports = router
