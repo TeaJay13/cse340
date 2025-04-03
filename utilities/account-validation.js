@@ -76,6 +76,52 @@ validate.loginRules = () => {
     ]
   }
 
+/* ****************************************
+ * Validation rules for account updates
+ **************************************** */
+validate.updateAccountRules = () => {
+  return [
+    body("account_firstname")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("First name is required."),
+    body("account_lastname")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Last name is required."),
+    body("account_email")
+      .trim()
+      .isEmail()
+      .withMessage("A valid email is required.")
+      .custom(async (email, { req }) => {
+        const existingEmail = await accountModel.checkExistingEmail(email);
+        if (existingEmail && email !== req.body.original_email) {
+          throw new Error("Email is already in use.");
+        }
+      }),
+  ];
+}
+
+/* ****************************************
+ * Validation rules for password changes
+ **************************************** */
+validate.passwordRules = () => {
+  return [
+    body("account_password")
+      .trim()
+      .isLength({ min: 8 })
+      .withMessage("Password must be at least 8 characters long.")
+      .matches(/[A-Z]/)
+      .withMessage("Password must contain at least one uppercase letter.")
+      .matches(/[a-z]/)
+      .withMessage("Password must contain at least one lowercase letter.")
+      .matches(/[0-9]/)
+      .withMessage("Password must contain at least one number.")
+      .matches(/[\W_]/)
+      .withMessage("Password must contain at least one special character."),
+  ];
+}
+
 /* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
@@ -114,8 +160,42 @@ validate.checkLoginData = async (req, res, next) => {
     }
     next()
   }
-  
-  module.exports = validate
+
+/* ****************************************
+ * Middleware to check account update data
+ **************************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await utilities.getNav();
+    return res.status(400).render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: errors.array(),
+      accountData: req.body,
+    });
+  }
+  next();
+}
+
+/* ****************************************
+ * Middleware to check password data
+ **************************************** */
+validate.checkPasswordData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await utilities.getNav();
+    return res.status(400).render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: errors.array(),
+      accountData: { account_id: req.body.account_id },
+    });
+  }
+  next();
+}
+
+module.exports = validate
 
 
 

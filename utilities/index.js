@@ -111,24 +111,46 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
-   jwt.verify(
-    req.cookies.jwt,
-    process.env.ACCESS_TOKEN_SECRET,
-    function (err, accountData) {
-     if (err) {
-      req.flash("Please log in")
-      res.clearCookie("jwt")
-      return res.redirect("/account/login")
-     }
-     res.locals.accountData = accountData
-     res.locals.loggedin = 1
-     next()
-    })
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("notice", "Please log in.")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
+        }
+        req.user = accountData // Attach decoded JWT data to req.user
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1 // Mark user as logged in
+        next()
+      }
+    )
   } else {
-   next()
+    res.locals.loggedin = 0 // Mark user as not logged in
+    next()
   }
- }
+}
 
+/* ****************************************
+ * Middleware to verify JWT and attach user data
+ * *************************************** */
+function verifyJWT(req, res, next) {
+  const token = req.cookies.jwt
+  if (!token) {
+    req.flash("notice", "You must be logged in to view this page.")
+    return res.redirect("/account/login")
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+    req.user = decoded
+    next()
+  } catch (error) {
+    console.error("JWT verification failed:", error)
+    req.flash("notice", "Invalid session. Please log in again.")
+    res.redirect("/account/login")
+  }
+}
 
 /* ****************************************
  *  Check Login
@@ -142,5 +164,7 @@ Util.checkLogin = (req, res, next) => {
   }
  }
 
-
-module.exports = Util
+module.exports = {
+  ...Util,
+  verifyJWT,
+}

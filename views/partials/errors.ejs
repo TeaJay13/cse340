@@ -1,0 +1,14 @@
+<% if (Array.isArray(errors) && errors.length > 0) { %>
+  <div class="errors">
+    <% errors.forEach(function(error) { %>
+      <p class="error"><%= error.msg %></p>
+    <% }) %>
+  </div>
+<% } %>
+<% if (Array.isArray(messages) && messages.length > 0) { %>
+  <div class="messages">
+    <% messages.forEach(function(message) { %>
+      <p class="message"><%= message %></p>
+    <% }) %>
+  </div>
+<% } %>
