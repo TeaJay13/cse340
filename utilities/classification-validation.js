@@ -13,8 +13,8 @@ validate.classificationRules = () => {
             .escape()
             .notEmpty()
             .isLength({ min: 1 })
-            .matches(/^[A-Za-z\s]+$/) // only letters and spaces
-            .withMessage("Please provide a valid classification name."), // on error this message is sent.
+            .matches(/^[A-Za-z\s]+$/)
+            .withMessage("Please provide a valid classification name."),
     ]
 }
 

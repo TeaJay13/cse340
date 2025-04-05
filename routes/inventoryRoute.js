@@ -49,7 +49,7 @@ router.get(
 // Route to handle update inventory
 router.post(
   "/update/",
-  inventoryValidate.inventoryRules(), // Reuse inventoryRules
+  inventoryValidate.inventoryRules(),
   inventoryValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory)
 )

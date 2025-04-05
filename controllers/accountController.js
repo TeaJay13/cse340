@@ -82,7 +82,7 @@ async function registerAccount(req, res) {
 async function accountLogin(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
-  const accountData = await accountModel.getAccountByEmail(account_email) // Fetch account data by email
+  const accountData = await accountModel.getAccountByEmail(account_email)
   if (!accountData) {
     req.flash("notice", "Please check your credentials and try again.")
     res.status(400).render("account/login", {
@@ -104,10 +104,10 @@ async function accountLogin(req, res) {
         account_email: accountData.account_email,
       }
       const accessToken = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" })
-      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 }) // Set JWT cookie
+      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
       res.locals.accountData = tokenPayload
       res.locals.loggedin = 1
-      return res.redirect("/account") // Redirect to account management
+      return res.redirect("/account")
     } else {
       req.flash("notice", "Please check your credentials and try again.")
       res.status(400).render("account/login", {
@@ -134,7 +134,7 @@ async function buildAccount(req, res, next) {
     return res.redirect("/account/login");
   }
   try {
-    const accountData = await accountModel.getAccountById(req.user.account_id); // Fetch account data using account_id
+    const accountData = await accountModel.getAccountById(req.user.account_id);
     if (accountData.rows.length === 0) {
       req.flash("notice", "Account not found.");
       return res.redirect("/account/login");
@@ -145,7 +145,7 @@ async function buildAccount(req, res, next) {
       errors: [],
       messages: req.flash("notice") || [],
       accountData: accountData.rows[0],
-      account_type: accountData.rows[0].account_type, // Pass account_type to the view
+      account_type: accountData.rows[0].account_type, 
     });
   } catch (error) {
     console.error("Error fetching account data:", error);
@@ -159,7 +159,7 @@ async function buildAccount(req, res, next) {
 * *************************************** */
 async function buildAccountUpdate(req, res, next) {
   let nav = await utilities.getNav();
-  const accountData = await accountModel.getAccountById(req.params.id); // Fetch account data by ID
+  const accountData = await accountModel.getAccountById(req.params.id);
 
   if (accountData.rows.length > 0) {
     res.render("account/update", {
@@ -180,7 +180,7 @@ async function buildAccountUpdate(req, res, next) {
 * *************************************** */
 async function updateAccount(req, res) {
   let nav = await utilities.getNav();
-  console.log("Request Body:", req.body); // Log the entire request body
+  console.log("Request Body:", req.body);
   const { account_id, account_firstname, account_lastname, account_email } = req.body;
 
   if (!account_id) {
@@ -206,7 +206,7 @@ async function updateAccount(req, res) {
         title: "Update Account",
         nav,
         errors: null,
-        accountData: req.body, // Pass the form data back to the view
+        accountData: req.body,
       });
     }
   } catch (error) {
@@ -216,7 +216,7 @@ async function updateAccount(req, res) {
       title: "Update Account",
       nav,
       errors: null,
-      accountData: req.body, // Pass the form data back to the view
+      accountData: req.body,
     });
   }
 }
@@ -235,7 +235,7 @@ async function updatePassword(req, res) {
       title: "Update Account",
       nav,
       errors: null,
-      accountData: { account_id }, // Pass the account ID back to the view
+      accountData: { account_id },
     });
   }
 
@@ -251,7 +251,7 @@ async function updatePassword(req, res) {
         title: "Update Account",
         nav,
         errors: null,
-        accountData: { account_id }, // Pass the account ID back to the view
+        accountData: { account_id },
       });
     }
   } catch (error) {
@@ -261,7 +261,7 @@ async function updatePassword(req, res) {
       title: "Update Account",
       nav,
       errors: null,
-      accountData: { account_id }, // Pass the account ID back to the view
+      accountData: { account_id },
     });
   }
 }

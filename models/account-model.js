@@ -23,7 +23,7 @@ async function getAccountByEmail(account_email) {
       'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_email = $1',
       [account_email]
     );
-    return result.rows[0]; // Return the first matching row
+    return result.rows[0];
   } catch (error) {
     return new Error("No matching email found");
   }
@@ -48,7 +48,7 @@ async function checkExistingEmail(account_email){
 async function getAccountById(account_id) {
   try {
     const sql = "SELECT account_id, account_firstname, account_lastname, account_email, account_type FROM account WHERE account_id = $1"
-    return await pool.query(sql, [account_id]) // Return account data
+    return await pool.query(sql, [account_id])
   } catch (error) {
     return error.message
   }
