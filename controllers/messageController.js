@@ -39,11 +39,6 @@ async function createMessage(req, res) {
   const { message_subject, message_body, message_to } = req.body;
   const message_from = req.user.account_id;
 
-  if (!message_subject || !message_body || !message_to) {
-    req.flash("notice", "All fields are required.");
-    return res.redirect("/message/new");
-  }
-
   try {
     await messageModel.createMessage(message_subject, message_body, message_to, message_from);
     req.flash("notice", "Message sent successfully.");
@@ -156,11 +151,6 @@ async function replyToMessage(req, res) {
   const { message_subject, message_body } = req.body;
   const message_from = req.user.account_id;
   const message_to = req.params.id; 
-
-  if (!message_subject || !message_body) {
-    req.flash("notice", "All fields are required.");
-    return res.redirect(`/message/reply/${req.params.id}`);
-  }
 
   try {
     await messageModel.replyToMessage(message_subject, message_body, message_to, message_from);
