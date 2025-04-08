@@ -86,11 +86,28 @@ async function updatePassword(account_id, account_password) {
   }
 }
 
+/* *****************************
+ * Get all accounts except the current user
+ * *************************** */
+async function getAllAccountsExcept(account_id) {
+  try {
+    const sql = `
+      SELECT account_id, account_firstname, account_lastname
+      FROM account
+      WHERE account_id != $1
+      ORDER BY account_firstname, account_lastname`;
+    return await pool.query(sql, [account_id]);
+  } catch (error) {
+    return error.message;
+  }
+}
+
 module.exports = { 
   registerAccount, 
   getAccountByEmail, 
   checkExistingEmail, 
   getAccountById,
   updateAccount,
-  updatePassword
+  updatePassword,
+  getAllAccountsExcept
 }

@@ -1,0 +1,20 @@
+<h1>New Message</h1>
+<form action="/message/new" method="POST">
+  <label for="message_to">To:</label>
+  <select id="message_to" name="message_to" required>
+    <option value="">Select a recipient</option>
+    <% recipients.forEach((recipient) => { %>
+      <option value="<%= recipient.account_id %>">
+        <%= recipient.account_firstname %> <%= recipient.account_lastname %>
+      </option>
+    <% }); %>
+  </select>
+  
+  <label for="message_subject">Subject:</label>
+  <input type="text" id="message_subject" name="message_subject" required>
+  
+  <label for="message_body">Message:</label>
+  <textarea id="message_body" name="message_body" required></textarea>
+  
+  <button type="submit">Send</button>
+</form>

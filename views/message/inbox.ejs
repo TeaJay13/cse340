@@ -1,0 +1,24 @@
+<h1>Inbox</h1>
+
+<!-- Button to Create a New Message -->
+<p>
+  <a href="/message/new" class="btn btn-primary">Create New Message</a>
+</p>
+
+<% if (messages.length === 0) { %>
+  <p>No messages in your inbox.</p>
+<% } else { %>
+  <ul>
+    <% messages.forEach((message) => { %>
+      <li>
+        <strong><%= message.message_subject %></strong> - <%= message.sender %> - <%= message.message_created %>
+        <% if (!message.message_read) { %>
+          <a href="/message/read/<%= message.message_id %>" class="btn btn-link">Mark as Read</a>
+        <% } %>
+        <a href="/message/archive/<%= message.message_id %>" class="btn btn-link">Archive</a>
+        <a href="/message/delete/<%= message.message_id %>" class="btn btn-link">Delete</a>
+        <a href="/message/reply/<%= message.message_id %>" class="btn btn-link">Reply</a>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>

@@ -1,0 +1,13 @@
+<h1>Reply to Message</h1>
+<form action="/message/reply/<%= message.message_from %>" method="POST">
+  <label for="message_to">To:</label>
+  <input type="text" id="message_to" name="message_to" value="<%= message.sender_email %>" readonly>
+
+  <label for="message_subject">Subject:</label>
+  <input type="text" id="message_subject" name="message_subject" value="Re: <%= message.message_subject %>" required>
+
+  <label for="message_body">Message:</label>
+  <textarea id="message_body" name="message_body" required></textarea>
+
+  <button type="submit">Send Reply</button>
+</form>
