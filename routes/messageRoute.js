@@ -2,6 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const messageController = require("../controllers/messageController");
 const utilities = require("../utilities");
+const messageValidation = require("../utilities/message-validation");
 
 // Default route for /message
 router.get("/", utilities.checkJWTToken, (req, res) => {
@@ -15,7 +16,13 @@ router.get("/inbox", utilities.checkJWTToken, messageController.buildInbox);
 router.get("/new", utilities.checkJWTToken, messageController.buildNewMessage);
 
 // Create message route
-router.post("/new", utilities.checkJWTToken, messageController.createMessage);
+router.post(
+  "/new",
+  utilities.checkJWTToken,
+  messageValidation.newMessageRules(),
+  messageValidation.checkMessageData,
+  messageController.createMessage
+);
 
 // Mark a message as read
 router.get("/read/:id", utilities.checkJWTToken, messageController.markMessageAsRead);
@@ -29,6 +36,12 @@ router.get("/delete/:id", utilities.checkJWTToken, messageController.deleteMessa
 
 // Reply to a message
 router.get("/reply/:id", utilities.checkJWTToken, messageController.buildReplyMessage);
-router.post("/reply/:id", utilities.checkJWTToken, messageController.replyToMessage);
+router.post(
+  "/reply/:id",
+  utilities.checkJWTToken,
+  messageValidation.replyMessageRules(),
+  messageValidation.checkMessageData,
+  messageController.replyToMessage
+);
 
 module.exports = router;
